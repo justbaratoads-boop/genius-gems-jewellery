@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Jewellery Designs | Genius Gems & Jewellery</title>
+    <meta name="description" content="Turn your dream jewellery into a beautiful reality. Work with our master artisans to create custom gold, platinum, and diamond engagement rings or bridal sets.">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Sticky Navigation Header -->
+    <header id="global-header"></header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" style="background-image: url('assets/images/hero1.png');">
+        <div class="page-banner-content">
+            <h1>Bespoke Creations</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; <span>Bespoke Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bespoke Section Intro -->
+    <section class="section bespoke-section">
+        <div class="container">
+            <div class="bespoke-intro">
+                <h2>The Bespoke Experience</h2>
+                <p>Genius Gems invites you to embark on a collaborative journey. From sketches to casting, our master designers help you create a custom jewellery piece that is truly unique, reflecting your personal style, budget, and legacy.</p>
+            </div>
+
+            <!-- The Custom Process (Steps) -->
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>Discuss your inspirations, budget, metal, and gemstone choices online or at our Mumbai showroom.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>CAD & Design</h3>
+                    <p>Review digital 3D CAD mockups and sketches. Refine details until it matches your dream vision perfectly.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Handcrafting</h3>
+                    <p>Our expert karigars select the gemstones, cast the metal, and set every stone with microscopic precision.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Delivery</h3>
+                    <p>Receive your certified, hallmarked heirloom in luxury gift packaging, with fully insured shipping.</p>
+                </div>
+            </div>
+
+            <!-- Inquiry Form -->
+            <div class="bespoke-form-container">
+                <div class="section-title" style="margin-bottom: 40px;">
+                    <h2>Bespoke Inquiry Form</h2>
+                    <p>Share your ideas and let us create your masterpiece</p>
+                </div>
+
+                <form id="bespoke-inquiry-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="custom-name">Full Name *</label>
+                            <input type="text" id="custom-name" class="form-control" placeholder="Meenakshi Sharma" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-phone">WhatsApp Number *</label>
+                            <input type="tel" id="custom-phone" class="form-control" placeholder="+91 99999 99999" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-email">Email Address *</label>
+                            <input type="email" id="custom-email" class="form-control" placeholder="meenakshi@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-occasion">Occasion</label>
+                            <select id="custom-occasion" class="form-control">
+                                <option value="engagement">Engagement / Wedding Ring</option>
+                                <option value="bridal">Bridal Jewellery Set</option>
+                                <option value="anniversary">Anniversary Gift</option>
+                                <option value="birthday">Birthday Celebration</option>
+                                <option value="other">Personal Gift / Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-metal">Preferred Metal</label>
+                            <select id="custom-metal" class="form-control">
+                                <option value="22k-gold">22K Yellow Gold (BIS Hallmark)</option>
+                                <option value="18k-gold">18K Yellow Gold</option>
+                                <option value="rose-gold">18K Rose Gold</option>
+                                <option value="platinum">950 Platinum</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-stone">Primary Gemstone</label>
+                            <select id="custom-stone" class="form-control">
+                                <option value="diamond">Solitaire Diamond</option>
+                                <option value="ruby">Burmese Ruby</option>
+                                <option value="emerald">Zambian Emerald</option>
+                                <option value="none">Plain Metal (No stones)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="custom-budget">Estimated Budget: <span class="budget-val" id="budget-value-display">₹15,000</span></label>
+                            <input type="range" id="custom-budget" min="10000" max="50000" step="2000" value="15000" class="form-control" style="padding: 5px 0;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--charcoal-light);">
+                                <span>₹10,000</span>
+                                <span>₹50,000+</span>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="custom-description">Describe Your Vision *</label>
+                            <textarea id="custom-description" class="form-control" placeholder="Please describe details of the shape, stone size, ring size, metal finish, or any special engraving you would like..." required></textarea>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 15px;">
+                            <button type="submit" class="btn btn-primary" id="custom-submit-btn" style="width: 100%;">Submit & Enquire on WhatsApp</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer id="global-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>

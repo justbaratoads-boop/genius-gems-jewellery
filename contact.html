@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Our Atelier | Genius Gems & Jewellery</title>
+    <meta name="description" content="Visit the Genius Gems & Jewellery showroom in Mumbai. Find store hours, maps, email, and phone numbers, or submit a request directly to our team.">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Sticky Navigation Header -->
+    <header id="global-header"></header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" style="background-image: url('assets/images/hero1.png');">
+        <div class="page-banner-content">
+            <h1>Contact Us</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; <span>Contact Us</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info & Form Section -->
+    <section class="section contact-section">
+        <div class="container">
+            <div class="contact-layout">
+                
+                <!-- Left Column: Contact info cards -->
+                <div class="contact-info-card">
+                    <h3>The Jaipur Showroom</h3>
+                    
+                    <div class="contact-detail-list">
+                        <div class="contact-detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Atelier Location</h4>
+                                <p>G36 Stock Exchange, Gaurav Tower,<br>Malviya Nagar, Jaipur - 302017</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Phone & Chat</h4>
+                                <p><strong>WhatsApp / Tel:</strong> +91 97859 25876</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Direct Email</h4>
+                                <p>geniusgemsandjewellery@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Store Hours -->
+                    <div class="contact-hours">
+                        <h3>Showroom Hours</h3>
+                        <table class="hours-table">
+                            <tbody>
+                                <tr>
+                                    <td>Monday - Friday</td>
+                                    <td>10:30 AM - 8:30 PM</td>
+                                </tr>
+                                <tr>
+                                    <td>Saturday</td>
+                                    <td>11:00 AM - 9:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td>Sunday</td>
+                                    <td class="text-gold" style="font-weight: 600;">Closed (By Appointment Only)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contact Inquiry Form -->
+                <div class="contact-form-card">
+                    <h3>Send A Message</h3>
+                    <p style="margin-bottom: 25px; font-size: 0.95rem;">Have questions regarding certifications, buyback policies, or design prices? Reach out and our manager will reply within 24 hours.</p>
+                    
+                    <form id="contact-inquiry-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="contact-name">Your Name *</label>
+                                <input type="text" id="contact-name" class="form-control" placeholder="Vikram Malhotra" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email Address *</label>
+                                <input type="email" id="contact-email" class="form-control" placeholder="vikram@gmail.com" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="contact-subject">Subject *</label>
+                                <input type="text" id="contact-subject" class="form-control" placeholder="Inquiry about gold rate lock/exchange options" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="contact-message">Message *</label>
+                                <textarea id="contact-message" class="form-control" placeholder="Type your detailed question here..." required></textarea>
+                            </div>
+                            <div class="form-group full-width" style="margin-top: 10px;">
+                                <button type="submit" class="btn btn-primary" id="contact-submit-btn" style="width: 100%;">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Map Embed -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.103046777647!2d75.82029587635677!3d26.836709876693893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db60e3a479ff7%3A0x6e9f14068ef06e1b!2sGaurav%20Tower%2C%20Malviya%20Nagar%2C%20Jaipur%2C%20Rajasthan%20302017!5e0!3m2!1sen!2sin!4v1784032500000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer id="global-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Contact Form Handling
+        const contactForm = document.getElementById('contact-inquiry-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('contact-name').value.trim();
+                const email = document.getElementById('contact-email').value.trim();
+                const subject = document.getElementById('contact-subject').value.trim();
+                const message = document.getElementById('contact-message').value.trim();
+
+                // Custom validation feedback
+                showToast(`Thank you, ${name}! Your inquiry has been sent successfully.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>

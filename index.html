@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genius Gems & Jewellery | Handcrafted Luxury Gold & Diamond Jewellery</title>
+    <meta name="description" content="Discover exquisite certified gold and diamond jewellery at Genius Gems & Jewellery. Explore rings, necklaces, earrings, and bespoke bridal collections with BIS 916 Hallmark purity.">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Sticky Navigation Header (Dynamically loaded) -->
+    <header id="global-header"></header>
+
+    <!-- Hero Banner Slider -->
+    <section class="hero" id="home-hero">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('assets/images/hero_gems.png');"></div>
+            <div class="hero-slide" style="background-image: url('assets/images/sapphire.png');"></div>
+        </div>
+
+        <div class="hero-content">
+            <p class="hero-subtitle">Rare Natural Gemstones Since 1998</p>
+            <h2 class="hero-title">Precious Gemstones. <strong>Timeless Saturation & Clarity.</strong></h2>
+            <div class="hero-actions">
+                <a href="shop.html" class="btn btn-secondary" id="hero-btn-shop">Explore Collection</a>
+                <a href="custom.html" class="btn btn-outline-white" id="hero-btn-bespoke">Bespoke Design</a>
+            </div>
+        </div>
+
+        <div class="hero-controls">
+            <span class="hero-dot active" data-slide="0"></span>
+            <span class="hero-dot" data-slide="1"></span>
+        </div>
+    </section>
+
+    <!-- Shop by Category Grid -->
+    <section class="section category-section" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop by Gemstone</h2>
+                <p>Exquisite natural treasures of certified purity and origin</p>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-card large" onclick="window.location.href='shop.html?category=sapphires'" id="cat-sapphires">
+                    <img src="assets/images/sapphire.png" alt="Blue Sapphires" class="category-img" loading="lazy">
+                    <div class="category-content">
+                        <h3>Blue Sapphires</h3>
+                        <span>View Collection &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card large" onclick="window.location.href='shop.html?category=emeralds'" id="cat-emeralds">
+                    <img src="assets/images/emerald.png" alt="Green Emeralds" class="category-img" loading="lazy">
+                    <div class="category-content">
+                        <h3>Green Emeralds</h3>
+                        <span>View Collection &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card medium" onclick="window.location.href='shop.html?category=rubies'" id="cat-rubies">
+                    <img src="assets/images/ruby.png" alt="Burmese Rubies" class="category-img" loading="lazy">
+                    <div class="category-content">
+                        <h3>Burmese Rubies</h3>
+                        <span>View Collection &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card medium" onclick="window.location.href='shop.html?category=yellow-sapphires'" id="cat-yellow-sapphires">
+                    <img src="assets/images/yellow_sapphire.png" alt="Yellow Sapphires" class="category-img" loading="lazy">
+                    <div class="category-content">
+                        <h3>Yellow Sapphires</h3>
+                        <span>View Collection &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card medium" onclick="window.location.href='shop.html?category=diamonds'" id="cat-diamonds">
+                    <img src="assets/images/ring1.png" alt="Certified Diamonds" class="category-img" loading="lazy">
+                    <div class="category-content">
+                        <h3>Certified Diamonds</h3>
+                        <span>View Collection &rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Carousel -->
+    <section class="section featured-section" id="featured">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Masterpieces</h2>
+                <p>Selected designs showing ultimate craftsmanship</p>
+            </div>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" id="carousel-prev-btn" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                <div class="product-carousel" id="featured-carousel-inner">
+                    <!-- Cards will be dynamically injected by homepage script -->
+                </div>
+                <button class="carousel-btn next" id="carousel-next-btn" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-choose-us" id="trust-factors">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Genius Gems</h2>
+                <p>Purity in every carat, trust in every deal</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>BIS 916 Hallmark</h3>
+                    <p>Every piece of gold jewellery carries the government-approved BIS 916 Hallmarking for certified purity and peace of mind.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Certified Diamonds</h3>
+                    <p>Our diamonds are certified by global standards like GIA and IGI, detailing precise cut, clarity, color, and carat weight.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-drafting-compass"></i>
+                    </div>
+                    <h3>Bespoke Artistry</h3>
+                    <p>Work directly with our award-winning designers to turn your personal inspirations into custom-crafted, one-of-a-kind treasures.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Legacy of Trust</h3>
+                    <p>Serving thousands of happy families since 1998, we pride ourselves on transparency, honesty, and lifetime buyback options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2>Words of Admiration</h2>
+                <p>Hear from our family of patrons</p>
+            </div>
+
+            <div class="testimonial-container">
+                <div class="testimonial-slide active">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"For my daughter's wedding, we wanted traditional Nakshi bangles and a custom Kundan bridal set. Genius Gems and Jewellery delivered masterpieces that became the highlight of the event. Their attention to detailing is outstanding!"</p>
+                    <h4 class="testimonial-author">Meenakshi Iyer <span>- Mumbai</span></h4>
+                </div>
+
+                <div class="testimonial-slide">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"I was searching for a premium platinum engagement ring with a GIA certified solitaire diamond. The transparency, pricing, and certified purity details provided by Genius Gems made my purchase completely stress-free."</p>
+                    <h4 class="testimonial-author">Aditya Sharma <span>- Delhi</span></h4>
+                </div>
+
+                <div class="testimonial-slide">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Their custom bespoke service is remarkable. I shared a rough drawing of an emerald pendant I wanted for my anniversary. The 3D CAD design step was super helpful and the final piece is absolutely gorgeous."</p>
+                    <h4 class="testimonial-author">Sarah D'souza <span>- Bangalore</span></h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Gallery Section -->
+    <section class="section instagram-section" id="social-proof">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Instagram Diary</h2>
+                <p>Stay inspired with our daily luxurious creations</p>
+            </div>
+
+            <div class="instagram-grid">
+                <div class="instagram-item">
+                    <img src="assets/images/ring1.png" alt="Insta Post 1" class="instagram-img" loading="lazy">
+                    <div class="instagram-hover">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/hero2.png" alt="Insta Post 2" class="instagram-img" loading="lazy">
+                    <div class="instagram-hover">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/earring1.png" alt="Insta Post 3" class="instagram-img" loading="lazy">
+                    <div class="instagram-hover">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/bangle1.png" alt="Insta Post 4" class="instagram-img" loading="lazy">
+                    <div class="instagram-hover">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/hero1.png" alt="Insta Post 5" class="instagram-img" loading="lazy">
+                    <div class="instagram-hover">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/ring1.png" alt="Insta Post 6" class="instagram-img" loading="lazy">
+                    <div class="instagram-hover">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Sign up -->
+    <section class="section newsletter" id="newsletter-signup">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join The Genius Privilege</h2>
+                <p>Subscribe to receive exclusive access to new collections, design previews, and luxury heritage stories.</p>
+                <form class="newsletter-form" id="home-newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Newsletter email input" id="news-email-field">
+                    <button type="submit" class="newsletter-submit" id="news-submit-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer (Dynamically loaded) -->
+    <footer id="global-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Hero Slider Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.hero-dot');
+        let currentSlide = 0;
+        const slideInterval = 5000;
+
+        function changeSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = (index + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // Dot indicators
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                changeSlide(index);
+            });
+        });
+
+        // Autoplay
+        setInterval(() => {
+            changeSlide(currentSlide + 1);
+        }, slideInterval);
+
+        // Featured Products Injection & Carousel Logic
+        const carouselInner = document.getElementById('featured-carousel-inner');
+        const prevBtn = document.getElementById('carousel-prev-btn');
+        const nextBtn = document.getElementById('carousel-next-btn');
+
+        // Render featured products from products.js
+        const featuredProducts = getFeaturedProducts();
+        
+        featuredProducts.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-card-img-wrapper">
+                    <img src="${product.images[0]}" alt="${product.name}" class="product-card-img" loading="lazy">
+                    <div class="product-card-overlay">
+                        <div class="product-action-btn" title="Add to Wishlist" onclick="event.stopPropagation(); window.toggleWishlist('${product.id}')">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn" title="View Details" onclick="window.location.href='product.html?id=${product.id}'">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card-info" onclick="window.location.href='product.html?id=${product.id}'" style="cursor: pointer;">
+                    <div>
+                        <p class="product-card-category">${product.category.toUpperCase().replace('-', ' ')}</p>
+                        <h3 class="product-card-title">${product.name}</h3>
+                    </div>
+                    <p class="product-card-price">₹${product.price.toLocaleString('en-IN')}</p>
+                </div>
+            `;
+            carouselInner.appendChild(card);
+        });
+
+        // Carousel Scroll Logic
+        let scrollPosition = 0;
+        const cardWidth = 310; // card width + gap approx
+        
+        nextBtn.addEventListener('click', () => {
+            const maxScroll = carouselInner.scrollWidth - carouselInner.clientWidth;
+            if (scrollPosition < maxScroll) {
+                scrollPosition += cardWidth;
+                if (scrollPosition > maxScroll) scrollPosition = maxScroll;
+                carouselInner.style.transform = `translateX(-${scrollPosition}px)`;
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (scrollPosition > 0) {
+                scrollPosition -= cardWidth;
+                if (scrollPosition < 0) scrollPosition = 0;
+                carouselInner.style.transform = `translateX(-${scrollPosition}px)`;
+            }
+        });
+
+        // Responsive adjustment on resize
+        window.addEventListener('resize', () => {
+            scrollPosition = 0;
+            carouselInner.style.transform = `translateX(0)`;
+        });
+
+        // Testimonials Auto Slide
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        let currentTestimonial = 0;
+
+        setInterval(() => {
+            testimonialSlides[currentTestimonial].classList.remove('active');
+            currentTestimonial = (currentTestimonial + 1) % testimonialSlides.length;
+            testimonialSlides[currentTestimonial].classList.add('active');
+        }, 6000);
+    </script>
+</body>
+</html>

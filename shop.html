@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Exquisite Collections | Genius Gems & Jewellery</title>
+    <meta name="description" content="Explore our luxurious collections of gold, platinum, and diamond rings, necklaces, earrings, and bangles. Filter by purity, price, metal, and find your perfect masterpiece.">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Sticky Navigation Header -->
+    <header id="global-header"></header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" style="background-image: url('assets/images/hero1.png');">
+        <div class="page-banner-content">
+            <h1 id="shop-page-title">Exquisite Collections</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; <span id="breadcrumb-active">Shop</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Content Section -->
+    <section class="section shop-section">
+        <div class="container">
+            <div class="shop-layout">
+                
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar">
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <h3>Gemstone Family</h3>
+                        <div id="category-filters">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="category" value="sapphires"> Blue Sapphires
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="category" value="emeralds"> Green Emeralds
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="category" value="rubies"> Burmese Rubies
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="category" value="yellow-sapphires"> Yellow Sapphires
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="category" value="diamonds"> Certified Diamonds
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Metal Type Filter -->
+                    <div class="filter-group">
+                        <h3>Metal Type</h3>
+                        <div id="metal-filters">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="metal" value="Gold"> Gold
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="metal" value="Platinum"> Platinum
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="metal" value="Rose Gold"> Rose Gold
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Gemstone Filter -->
+                    <div class="filter-group">
+                        <h3>Gemstone</h3>
+                        <div id="gemstone-filters">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="gemstone" value="Diamond"> Diamond
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="gemstone" value="Ruby"> Ruby
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="gemstone" value="Emerald"> Emerald
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="gemstone" value="None"> No Stones (Plain)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="filter-group">
+                        <h3>Price Range</h3>
+                        <div id="price-filters">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="price" value="0-13000"> Under ₹13,000
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="price" value="13000-16000"> ₹13,000 - ₹16,000
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="price" value="16000-19000"> ₹16,000 - ₹19,000
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="price" value="19000-max"> Above ₹19,000
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline" id="clear-filters-btn" style="width: 100%;">Clear All Filters</button>
+                </aside>
+
+                <!-- Shop Main Content -->
+                <main class="shop-main">
+                    <!-- Toolbar (Sort and Counts) -->
+                    <div class="shop-toolbar">
+                        <div class="results-count">
+                            Showing <span id="showing-count">0</span> of <span id="total-count">0</span> Masterpieces
+                        </div>
+                        <div class="sort-wrapper">
+                            <label for="sort-select" style="font-size: 0.85rem; font-weight: 500; margin-right: 10px;">Sort By:</label>
+                            <select id="sort-select" class="sort-select">
+                                <option value="featured">Featured Designs</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Patron Rating</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="products-grid-inner">
+                        <!-- Product cards dynamically loaded here -->
+                    </div>
+                </main>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer id="global-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
+</body>
+</html>

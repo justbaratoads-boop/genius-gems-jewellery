@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Jewellery Details | Genius Gems & Jewellery</title>
+    <meta name="description" content="View specifications, certified weights, purity details, and enquire about our premium gold and diamond jewellery designs directly.">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Sticky Navigation Header -->
+    <header id="global-header"></header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" style="background-image: url('assets/images/hero1.png');">
+        <div class="page-banner-content">
+            <h1 id="product-banner-title">Design Details</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; <a href="shop.html">Shop</a> &nbsp;/&nbsp; <span id="breadcrumb-active">Design Details</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details Section -->
+    <section class="section product-detail-section">
+        <div class="container">
+            <div class="product-detail-layout" id="product-detail-container">
+                
+                <!-- Left: Product Image Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image-container" id="main-image-container">
+                        <img src="" alt="Main product" class="main-image" id="main-product-image">
+                    </div>
+                    <div class="thumbnail-grid" id="thumbnail-grid-inner">
+                        <!-- Thumbnails injected here -->
+                    </div>
+                </div>
+
+                <!-- Right: Product Information details -->
+                <div class="product-detail-info">
+                    <span class="product-detail-category" id="product-detail-category">RINGS</span>
+                    <h2 class="product-detail-title" id="product-detail-title">Loading product...</h2>
+                    
+                    <div class="product-detail-price" id="product-detail-price">₹0.00</div>
+                    
+                    <p class="product-detail-description" id="product-detail-description">
+                        Please wait while product details are loaded from our database...
+                    </p>
+
+                    <!-- Specifications Table -->
+                    <table class="product-spec-table">
+                        <tbody id="spec-table-body">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+
+                    <!-- Actions -->
+                    <div class="product-detail-actions">
+                        <button class="btn btn-primary" id="add-to-cart-btn">
+                            <i class="fas fa-shopping-bag" style="font-size: 1.1rem; margin-right: 8px;"></i> Add to Cart & Checkout
+                        </button>
+                        <a href="#" target="_blank" class="btn btn-outline" id="whatsapp-enquire-btn">
+                            <i class="fab fa-whatsapp" style="font-size: 1.1rem; margin-right: 8px;"></i> Enquire
+                        </a>
+                        <button class="btn-wishlist" id="detail-wishlist-btn" title="Add to Wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="detail-trust-badges">
+                        <div class="trust-badge-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>BIS 916 Hallmark<br>100% Certified Purity</span>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Insured Secure Shipping<br>Across India</span>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Lifetime Exchange<br>& Buyback Promise</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="section related-products-section" style="background-color: var(--ivory-dark); border-top: 1px solid rgba(212, 175, 55, 0.1);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Complements Your Style</h2>
+                <p>Hand-selected suggestions from our collections</p>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="related-grid-inner">
+                <!-- Related products cards dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer id="global-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/product.js"></script>
+</body>
+</html>

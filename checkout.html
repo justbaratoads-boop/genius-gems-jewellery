@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Genius Gems & Jewellery</title>
+    <meta name="description" content="Review your selected natural gemstones, calculate billing and taxes, and submit your order details directly to our Jaipur showroom.">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .checkout-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--ivory-dark);
+            margin-bottom: 30px;
+        }
+        
+        .checkout-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--ivory-dark);
+            padding-bottom: 12px;
+            color: var(--burgundy);
+        }
+        
+        /* Cart items list */
+        .checkout-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .checkout-item-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .checkout-item-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .checkout-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            background-color: var(--ivory-dark);
+            border: 1px solid var(--ivory-dark);
+        }
+        
+        .checkout-item-info {
+            flex-grow: 1;
+        }
+        
+        .checkout-item-title {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .checkout-item-meta {
+            font-size: 0.8rem;
+            color: var(--charcoal-light);
+        }
+        
+        .checkout-item-price {
+            font-weight: 600;
+            color: var(--burgundy);
+            font-size: 1.1rem;
+        }
+        
+        /* Summary Card */
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: var(--charcoal-light);
+        }
+        
+        .summary-row.total-row {
+            border-top: 1px solid var(--ivory-dark);
+            padding-top: 20px;
+            margin-top: 10px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--burgundy-dark);
+        }
+        
+        /* Disabled pay button */
+        .btn-disabled,
+        .btn-disabled:disabled {
+            background-color: #ECE8E0 !important;
+            color: #8C857A !important;
+            border: 1px solid #D2CBBF !important;
+            cursor: not-allowed !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 14px 28px !important;
+            border-radius: var(--radius-sm) !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            font-size: 0.85rem !important;
+            width: 100% !important;
+            margin-top: 20px !important;
+            box-shadow: none !important;
+            opacity: 1 !important;
+        }
+        
+        .btn-disabled:hover {
+            background-color: #ECE8E0 !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        .payment-notice {
+            font-size: 0.75rem;
+            color: var(--charcoal-light);
+            text-align: center;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 992px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation Header -->
+    <header id="global-header"></header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" style="background-image: url('assets/images/hero1.png');">
+        <div class="page-banner-content">
+            <h1>Checkout</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; <span>Checkout</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Main Content -->
+    <section class="section checkout-section">
+        <div class="container">
+            <div class="checkout-layout">
+                
+                <!-- Left Column: Items review & Billing Details -->
+                <div class="checkout-left">
+                    
+                    <!-- Gemstone Review Card -->
+                    <div class="checkout-card">
+                        <h3>1. Selected Gemstones</h3>
+                        <div class="checkout-items-list" id="checkout-cart-items">
+                            <!-- Injected dynamically via JS -->
+                            <p style="color: var(--charcoal-light);">Loading items from your cart...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Billing & Shipping Details Card -->
+                    <div class="checkout-card">
+                        <h3>2. Showroom Reservation Details</h3>
+                        <form id="checkout-details-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="bill-name">Full Name *</label>
+                                    <input type="text" id="bill-name" class="form-control" placeholder="Vikram Singh" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bill-phone">WhatsApp Number *</label>
+                                    <input type="tel" id="bill-phone" class="form-control" placeholder="+91 97859 25876" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bill-email">Email Address *</label>
+                                    <input type="email" id="bill-email" class="form-control" placeholder="vikram@gmail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bill-city">City *</label>
+                                    <input type="text" id="bill-city" class="form-control" placeholder="Jaipur" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="bill-address">Shipping / Reservation Address *</label>
+                                    <input type="text" id="bill-address" class="form-control" placeholder="House/Shop No, Street, Landmark" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bill-state">State *</label>
+                                    <input type="text" id="bill-state" class="form-control" placeholder="Rajasthan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bill-zip">PIN Code *</label>
+                                    <input type="text" id="bill-zip" class="form-control" placeholder="302017" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                
+                <!-- Right Column: Pricing Summary & Checkout Actions -->
+                <div class="checkout-right">
+                    <div class="checkout-card">
+                        <h3>Order Summary</h3>
+                        
+                        <div id="checkout-price-breakdown">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="summary-subtotal">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Insured Shipping</span>
+                                <span class="text-gold" style="font-weight: 500;">Free</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>GST / Taxes (3%)</span>
+                                <span id="summary-gst">₹0</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <span>Grand Total</span>
+                                <span id="summary-grandtotal">₹0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Primary Active WhatsApp Button -->
+                        <button type="button" class="btn btn-primary" id="whatsapp-order-btn" style="width: 100%; margin-top: 30px;">
+                            <i class="fab fa-whatsapp" style="font-size: 1.1rem; margin-right: 8px;"></i> Reserve on WhatsApp
+                        </button>
+                        
+                        <!-- Disabled Pay Now Button (Requested) -->
+                        <button type="button" class="btn-disabled" id="pay-now-btn" disabled>
+                            <i class="fas fa-lock" style="font-size: 0.9rem; margin-right: 8px;"></i> Pay Now
+                        </button>
+                        <p class="payment-notice">Online payment gateway coming soon. Please use WhatsApp reservation to lock in current rates.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer id="global-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const itemsListContainer = document.getElementById('checkout-cart-items');
+            const subtotalEl = document.getElementById('summary-subtotal');
+            const gstEl = document.getElementById('summary-gst');
+            const grandtotalEl = document.getElementById('summary-grandtotal');
+            
+            const form = document.getElementById('checkout-details-form');
+            const whatsappOrderBtn = document.getElementById('whatsapp-order-btn');
+
+            let cartList = [];
+
+            // 1. Fetch items from local storage wishlist
+            function loadCheckoutItems() {
+                const wishlist = getWishlist();
+                cartList = PRODUCTS.filter(p => wishlist.includes(p.id));
+                
+                renderItems();
+                calculateTotals();
+            }
+
+            // 2. Render Items
+            function renderItems() {
+                if (!itemsListContainer) return;
+                itemsListContainer.innerHTML = '';
+
+                if (cartList.length === 0) {
+                    itemsListContainer.innerHTML = `
+                        <div style="text-align: center; padding: 30px 0; color: var(--charcoal-light);">
+                            <i class="fas fa-shopping-bag" style="font-size: 2.5rem; color: var(--gold-light); margin-bottom: 15px; display: block;"></i>
+                            <p>Your gemstone selection is empty.</p>
+                            <a href="shop.html" class="btn btn-outline" style="margin-top: 15px;">Browse Gemstones</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                cartList.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'checkout-item-row';
+                    row.innerHTML = `
+                        <img src="${item.images[0]}" alt="${item.name}" class="checkout-item-img">
+                        <div class="checkout-item-info">
+                            <h4 class="checkout-item-title">${item.name}</h4>
+                            <p class="checkout-item-meta">${item.weight} | ${item.purity}</p>
+                        </div>
+                        <div class="checkout-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+                    `;
+                    itemsListContainer.appendChild(row);
+                });
+            }
+
+            // 3. Calculate Pricing Breakdown
+            function calculateTotals() {
+                const subtotal = cartList.reduce((sum, item) => sum + item.price, 0);
+                const gst = Math.round(subtotal * 0.03); // 3% standard gemstone tax
+                const grandTotal = subtotal + gst;
+
+                if (subtotalEl) subtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+                if (gstEl) gstEl.textContent = `₹${gst.toLocaleString('en-IN')}`;
+                if (grandtotalEl) grandtotalEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+            }
+
+            // 4. WhatsApp Order Submission
+            if (whatsappOrderBtn) {
+                whatsappOrderBtn.addEventListener('click', () => {
+                    // Check form validity
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    if (cartList.length === 0) {
+                        showToast("Please add gemstones to your list first.");
+                        return;
+                    }
+
+                    // Extract Billing Info
+                    const name = document.getElementById('bill-name').value.trim();
+                    const phone = document.getElementById('bill-phone').value.trim();
+                    const email = document.getElementById('bill-email').value.trim();
+                    const address = document.getElementById('bill-address').value.trim();
+                    const city = document.getElementById('bill-city').value.trim();
+                    const state = document.getElementById('bill-state').value.trim();
+                    const zip = document.getElementById('bill-zip').value.trim();
+
+                    // Format Items Text
+                    let itemsMessage = '';
+                    cartList.forEach((item, index) => {
+                        itemsMessage += `${index + 1}. *${item.name}* (Weight: ${item.weight}, Price: ₹${item.price.toLocaleString('en-IN')})\n`;
+                    });
+
+                    const subtotal = cartList.reduce((sum, item) => sum + item.price, 0);
+                    const gst = Math.round(subtotal * 0.03);
+                    const grandTotal = subtotal + gst;
+
+                    // Build full WhatsApp text
+                    const waPhone = "919785925876";
+                    const text = `Hello Genius Gems & Jewellery, I would like to reserve the following gemstone(s):\n\n*--- GEMSTONE SELECTIONS ---*\n${itemsMessage}\n*Subtotal*: ₹${subtotal.toLocaleString('en-IN')}\n*GST (3%)*: ₹${gst.toLocaleString('en-IN')}\n*Grand Total*: ₹${grandTotal.toLocaleString('en-IN')}\n\n*--- PATRON RESERVATION DETAILS ---*\n*Name*: ${name}\n*Phone*: ${phone}\n*Email*: ${email}\n*Address*: ${address}, ${city}, ${state} - ${zip}`;
+                    
+                    const encodedText = encodeURIComponent(text);
+                    const waUrl = `https://wa.me/${waPhone}?text=${encodedText}`;
+
+                    showToast("Redirecting to WhatsApp for reservation...");
+                    setTimeout(() => {
+                        window.open(waUrl, '_blank');
+                    }, 1000);
+                });
+            }
+
+            // Run initial load
+            loadCheckoutItems();
+        });
+    </script>
+</body>
+</html>

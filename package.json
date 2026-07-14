@@ -1,0 +1,13 @@
+{
+  "name": "genius-gems-jewellery",
+  "version": "1.0.0",
+  "description": "Static website for Genius Gems and Jewellery",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
