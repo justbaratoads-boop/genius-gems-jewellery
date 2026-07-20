@@ -475,6 +475,16 @@
                     const gst = Math.round(subtotal * 0.03);
                     const grandTotal = subtotal + gst;
 
+                    // Sanitize input contact number (digits only for Razorpay validation)
+                    const cleanPhone = phone.replace(/\D/g, '');
+
+                    // Safe notes formatting (Razorpay restricts notes values to max 256 characters)
+                    const addressNotes = `${address}, ${city}, ${state} - ${zip}`;
+                    const itemsNotes = cartList.map(item => `${item.name} (${item.weight})`).join(', ');
+                    
+                    const safeAddressNotes = addressNotes.substring(0, 240) + (addressNotes.length > 240 ? '...' : '');
+                    const safeItemsNotes = itemsNotes.substring(0, 240) + (itemsNotes.length > 240 ? '...' : '');
+
                     // Razorpay configuration options
                     const options = {
                         "key": "rzp_live_TFiOKNEV4gjYRr", // Live Razorpay Key ID
@@ -482,7 +492,7 @@
                         "currency": "INR",
                         "name": "Genius Gems & Jewellery",
                         "description": "Bespoke Gemstone Reservation Payment",
-                        "image": "assets/images/logo.png",
+                        "image": "https://geniusgemsandjewellery.in/assets/images/logo.png", // Absolute URL required
                         "handler": function (response) {
                             showToast("Payment Successful! Saving to database...");
                             
@@ -514,11 +524,11 @@
                         "prefill": {
                             "name": name,
                             "email": email,
-                            "contact": phone
+                            "contact": cleanPhone
                         },
                         "notes": {
-                            "address": `${address}, ${city}, ${state} - ${zip}`,
-                            "items": cartList.map(item => `${item.name} (${item.weight})`).join(', ')
+                            "address": safeAddressNotes,
+                            "items": safeItemsNotes
                         },
                         "theme": {
                             "color": "#4A0E17" // Brand luxury burgundy color
