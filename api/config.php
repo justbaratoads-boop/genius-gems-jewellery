@@ -4,9 +4,9 @@
 // ==========================================
 
 define('DB_HOST', 'localhost'); // Default for Hostinger
-define('DB_NAME', 'u123456789_genius_gems'); // Replace with Hostinger Database Name
-define('DB_USER', 'u123456789_genius_user'); // Replace with Hostinger Database User
-define('DB_PASS', 'AdminPassword_2026'); // Replace with Hostinger Database Password
+define('DB_NAME', 'genius_gems'); // Hostinger Database Name
+define('DB_USER', 'genius'); // Hostinger Database User
+define('DB_PASS', 'Sunilxyz@098'); // Hostinger Database Password
 
 // Establish database connection
 function get_db_connection() {
