@@ -5,11 +5,11 @@
 // --- BACKEND DATABASE CONFIGURATION ---
 // Paste your Google Sheet published Web App URL below to use Google Sheets as database.
 // Leave as "YOUR_GOOGLE_SCRIPT_WEB_APP_URL" to use Hostinger PHP MySQL by default.
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz74IY0QY9TDplW1dfPHBcaHfp6RcsB-Tm8qk2IOVgEdNvHUuJ1vXapsn1MtzDqO6BZ/exec"; 
+window.GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz74IY0QY9TDplW1dfPHBcaHfp6RcsB-Tm8qk2IOVgEdNvHUuJ1vXapsn1MtzDqO6BZ/exec"; 
 
-const getApiUrl = (endpoint) => {
-    if (typeof GOOGLE_SCRIPT_URL !== 'undefined' && GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_SCRIPT_WEB_APP_URL" && GOOGLE_SCRIPT_URL.trim() !== "") {
-        return GOOGLE_SCRIPT_URL.trim();
+window.getApiUrl = (endpoint) => {
+    if (typeof window.GOOGLE_SCRIPT_URL !== 'undefined' && window.GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_SCRIPT_WEB_APP_URL" && window.GOOGLE_SCRIPT_URL.trim() !== "") {
+        return window.GOOGLE_SCRIPT_URL.trim();
     }
     return `https://geniusgemsandjewellery.in/api/${endpoint}`;
 };
