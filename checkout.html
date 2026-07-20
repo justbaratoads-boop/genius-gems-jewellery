@@ -378,7 +378,7 @@
                     payment_id: paymentId
                 };
 
-                fetch(getApiUrl('save_order.php'), {
+                fetch(window.getApiUrl('save_order.php'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
