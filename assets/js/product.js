@@ -117,22 +117,61 @@ function initProductDetail() {
     }
 
     // WhatsApp Link Generation
-    if (whatsappBtn) {
-        const phone = "919785925876";
-        const pageUrl = window.location.href;
-        const text = `Hello Genius Gems & Jewellery, I would like to inquire about the following jewellery design:\n\n*Product Name*: ${product.name}\n*Product ID*: ${product.id}\n*Price*: ₹${product.price.toLocaleString('en-IN')}\n*Purity*: ${product.purity}\n\nLink: ${pageUrl}`;
-        const encodedText = encodeURIComponent(text);
-        whatsappBtn.href = `https://wa.me/${phone}?text=${encodedText}`;
+    // Carat Selector and Price Dynamic Update
+    const caratSelect = document.getElementById('product-carat-select');
+    const defaultCarat = 5;
+    
+    const updatePriceAndDetails = (carat) => {
+        const calculatedPrice = getPriceForCarat(product, carat);
+        if (priceEl) priceEl.textContent = `₹${calculatedPrice.toLocaleString('en-IN')}`;
+        
+        // Update WhatsApp Link
+        if (whatsappBtn) {
+            const phone = "919785925876";
+            const pageUrl = window.location.href;
+            const text = `Hello Genius Gems & Jewellery, I would like to reserve this gemstone:\n\n*Product Name*: ${product.name}\n*Product ID*: ${product.id}\n*Weight*: ${carat} Carats\n*Price*: ₹${calculatedPrice.toLocaleString('en-IN')}\n\nLink: ${pageUrl}`;
+            const encodedText = encodeURIComponent(text);
+            whatsappBtn.href = `https://wa.me/${phone}?text=${encodedText}`;
+        }
+    };
+
+    // Initialize with default Carat weight (5 Ct)
+    if (caratSelect) {
+        caratSelect.value = defaultCarat.toString();
+        updatePriceAndDetails(defaultCarat);
+        
+        // Listen for change
+        caratSelect.addEventListener('change', () => {
+            const carat = parseInt(caratSelect.value) || defaultCarat;
+            updatePriceAndDetails(carat);
+        });
+    } else {
+        updatePriceAndDetails(defaultCarat);
     }
 
     // Add to Cart & Checkout Button Handler
     const addToCartBtn = document.getElementById('add-to-cart-btn');
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', () => {
-            const wishlist = getWishlist();
+            const selectedCarat = caratSelect ? parseInt(caratSelect.value) : defaultCarat;
+            
+            // Update custom cart structure
+            let cart = JSON.parse(localStorage.getItem('genius_gems_cart') || '[]');
+            cart = cart.filter(item => item.id !== product.id);
+            cart.push({ id: product.id, carat: selectedCarat });
+            localStorage.setItem('genius_gems_cart', JSON.stringify(cart));
+            
+            // Maintain backwards compatibility with legacy wishlist
+            let wishlist = JSON.parse(localStorage.getItem('genius_gems_wishlist') || '[]');
             if (!wishlist.includes(product.id)) {
-                toggleWishlist(product.id);
+                wishlist.push(product.id);
+                localStorage.setItem('genius_gems_wishlist', JSON.stringify(wishlist));
             }
+            
+            if (typeof updateWishlistBadge === 'function') {
+                updateWishlistBadge();
+            }
+
             showToast("Gemstone added to cart. Redirecting to Checkout...");
             setTimeout(() => {
                 window.location.href = 'checkout.html';

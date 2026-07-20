@@ -49,7 +49,7 @@ function initCustomForm() {
 
             // Format message for WhatsApp
             const waPhone = "919785925876";
-            const message = `Hello Genius Gems & Jewellery, I would like to submit a Bespoke Design Inquiry:\n\n*Name*: ${name}\n*WhatsApp*: ${phone}\n*Email*: ${email}\n*Occasion*: ${occasion}\n*Metal Preference*: ${metal}\n*Gemstone Preference*: ${gemstone}\n*Estimated Budget*: ${budget}\n\n*Design Vision*:\n${vision}`;
+            const message = `Hello Genius Gems & Jewellery, I would like to submit a Bespoke Design Inquiry:\n\n*Name*: ${name}\n*WhatsApp*: ${phone}\n*Email*: ${email}\n*Occasion*: ${occasion}\n*Setting Finish*: ${metal}\n*Gemstone Preference*: ${gemstone}\n*Estimated Budget*: ${budget}\n\n*Design Vision*:\n${vision}`;
             
             const encodedMessage = encodeURIComponent(message);
             const waUrl = `https://wa.me/${waPhone}?text=${encodedMessage}`;

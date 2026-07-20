@@ -276,10 +276,30 @@
 
             let cartList = [];
 
-            // 1. Fetch items from local storage wishlist
+            // 1. Fetch items from local storage cart
             function loadCheckoutItems() {
-                const wishlist = getWishlist();
-                cartList = PRODUCTS.filter(p => wishlist.includes(p.id));
+                let cart = JSON.parse(localStorage.getItem('genius_gems_cart') || '[]');
+                
+                // Legacy Migration: if cart is empty but wishlist has items, populate cart with 5 Ct defaults
+                if (cart.length === 0) {
+                    const wishlist = typeof getWishlist === 'function' ? getWishlist() : [];
+                    if (wishlist.length > 0) {
+                        cart = wishlist.map(id => ({ id, carat: 5 }));
+                        localStorage.setItem('genius_gems_cart', JSON.stringify(cart));
+                    }
+                }
+
+                cartList = cart.map(cartItem => {
+                    const baseProduct = getProductById(cartItem.id);
+                    if (baseProduct) {
+                        const product = JSON.parse(JSON.stringify(baseProduct));
+                        product.selectedCarat = cartItem.carat;
+                        product.price = getPriceForCarat(product, cartItem.carat);
+                        product.weight = `${cartItem.carat}.00 Carat` + (cartItem.carat > 1 ? 's' : '');
+                        return product;
+                    }
+                    return null;
+                }).filter(Boolean);
                 
                 renderItems();
                 calculateTotals();
