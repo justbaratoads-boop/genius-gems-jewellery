@@ -2,6 +2,18 @@
 // GENIUS GEMS & JEWELLERY - MAIN JS
 // ==========================================
 
+// --- BACKEND DATABASE CONFIGURATION ---
+// Paste your Google Sheet published Web App URL below to use Google Sheets as database.
+// Leave as "YOUR_GOOGLE_SCRIPT_WEB_APP_URL" to use Hostinger PHP MySQL by default.
+const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL"; 
+
+const getApiUrl = (endpoint) => {
+    if (typeof GOOGLE_SCRIPT_URL !== 'undefined' && GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_SCRIPT_WEB_APP_URL" && GOOGLE_SCRIPT_URL.trim() !== "") {
+        return GOOGLE_SCRIPT_URL.trim();
+    }
+    return `https://geniusgemsandjewellery.in/api/${endpoint}`;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Render Header and Footer
     renderGlobalHeader();
