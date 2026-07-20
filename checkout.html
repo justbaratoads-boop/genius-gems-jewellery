@@ -103,32 +103,32 @@
             color: var(--burgundy-dark);
         }
         
-        /* Disabled pay button */
-        .btn-disabled,
-        .btn-disabled:disabled {
-            background-color: #ECE8E0 !important;
-            color: #8C857A !important;
-            border: 1px solid #D2CBBF !important;
-            cursor: not-allowed !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 14px 28px !important;
-            border-radius: var(--radius-sm) !important;
-            font-weight: 500 !important;
-            letter-spacing: 0.1em !important;
-            text-transform: uppercase !important;
-            font-size: 0.85rem !important;
-            width: 100% !important;
-            margin-top: 20px !important;
-            box-shadow: none !important;
-            opacity: 1 !important;
+        /* Active Razorpay button styling */
+        .btn-pay-now {
+            background-color: var(--burgundy);
+            color: var(--white);
+            border: 1px solid var(--burgundy);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            width: 100%;
+            margin-top: 15px;
+            transition: var(--transition-fast);
+            box-shadow: var(--shadow-sm);
         }
         
-        .btn-disabled:hover {
-            background-color: #ECE8E0 !important;
-            transform: none !important;
-            box-shadow: none !important;
+        .btn-pay-now:hover {
+            background-color: var(--burgundy-dark);
+            border-color: var(--burgundy-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
         .payment-notice {
@@ -246,11 +246,11 @@
                             <i class="fab fa-whatsapp" style="font-size: 1.1rem; margin-right: 8px;"></i> Reserve on WhatsApp
                         </button>
                         
-                        <!-- Disabled Pay Now Button (Requested) -->
-                        <button type="button" class="btn-disabled" id="pay-now-btn" disabled>
-                            <i class="fas fa-lock" style="font-size: 0.9rem; margin-right: 8px;"></i> Pay Now
+                        <!-- Active Pay Now Button (Razorpay) -->
+                        <button type="button" class="btn-pay-now" id="pay-now-btn">
+                            <i class="fas fa-credit-card" style="font-size: 0.9rem; margin-right: 8px;"></i> Pay Now (Razorpay)
                         </button>
-                        <p class="payment-notice">Online payment gateway coming soon. Please use WhatsApp reservation to lock in current rates.</p>
+                        <p class="payment-notice">Secure online checkout powered by Razorpay API. Instant order confirmation.</p>
                     </div>
                 </div>
                 
@@ -262,6 +262,7 @@
     <footer id="global-footer"></footer>
 
     <!-- Scripts -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="assets/js/products.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
@@ -391,6 +392,87 @@
                     setTimeout(() => {
                         window.open(waUrl, '_blank');
                     }, 1000);
+                });
+            }
+
+            // 5. Razorpay Payment Gateway Integration
+            const payNowBtn = document.getElementById('pay-now-btn');
+            if (payNowBtn) {
+                payNowBtn.addEventListener('click', () => {
+                    // Check form validity
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    if (cartList.length === 0) {
+                        showToast("Please add gemstones to your list first.");
+                        return;
+                    }
+
+                    // Extract Patron Details
+                    const name = document.getElementById('bill-name').value.trim();
+                    const phone = document.getElementById('bill-phone').value.trim();
+                    const email = document.getElementById('bill-email').value.trim();
+                    const address = document.getElementById('bill-address').value.trim();
+                    const city = document.getElementById('bill-city').value.trim();
+                    const state = document.getElementById('bill-state').value.trim();
+                    const zip = document.getElementById('bill-zip').value.trim();
+
+                    const subtotal = cartList.reduce((sum, item) => sum + item.price, 0);
+                    const gst = Math.round(subtotal * 0.03);
+                    const grandTotal = subtotal + gst;
+
+                    // Razorpay configuration options
+                    const options = {
+                        "key": "rzp_test_defaultKeyId", // Replace with actual Razorpay Key ID from Dashboard
+                        "amount": grandTotal * 100, // in paise
+                        "currency": "INR",
+                        "name": "Genius Gems & Jewellery",
+                        "description": "Bespoke Gemstone Reservation Payment",
+                        "image": "assets/images/logo.png",
+                        "handler": function (response) {
+                            showToast("Payment Successful! ID: " + response.razorpay_payment_id);
+                            
+                            // Send auto-confirmation details via WhatsApp after successful payment
+                            let itemsMessage = '';
+                            cartList.forEach((item, index) => {
+                                itemsMessage += `${index + 1}. *${item.name}* (Weight: ${item.weight}, Price: ₹${item.price.toLocaleString('en-IN')})\n`;
+                            });
+
+                            const successText = `Hello Genius Gems & Jewellery, I have completed the online payment of ₹${grandTotal.toLocaleString('en-IN')} (Razorpay ID: ${response.razorpay_payment_id}) for the following gemstones:\n\n*--- GEMSTONE SELECTIONS ---*\n${itemsMessage}\n*GST (3%)*: ₹${gst.toLocaleString('en-IN')}\n*Grand Total Paid*: ₹${grandTotal.toLocaleString('en-IN')}\n\n*--- RESERVATION DETAILS ---*\n*Name*: ${name}\n*Phone*: ${phone}\n*Address*: ${address}, ${city}, ${state} - ${zip}`;
+                            
+                            const waPhone = "919785925876";
+                            const encodedText = encodeURIComponent(successText);
+                            const waUrl = `https://wa.me/${waPhone}?text=${encodedText}`;
+                            
+                            setTimeout(() => {
+                                window.open(waUrl, '_blank');
+                                // Clear cart on success
+                                localStorage.removeItem('genius_gems_cart');
+                                localStorage.removeItem('genius_gems_wishlist');
+                                if (typeof updateWishlistBadge === 'function') {
+                                    updateWishlistBadge();
+                                }
+                                loadCheckoutItems();
+                            }, 1500);
+                        },
+                        "prefill": {
+                            "name": name,
+                            "email": email,
+                            "contact": phone
+                        },
+                        "notes": {
+                            "address": `${address}, ${city}, ${state} - ${zip}`,
+                            "items": cartList.map(item => `${item.name} (${item.weight})`).join(', ')
+                        },
+                        "theme": {
+                            "color": "#4A0E17" // Brand luxury burgundy color
+                        }
+                    };
+
+                    const rzp = new Razorpay(options);
+                    rzp.open();
                 });
             }
 
