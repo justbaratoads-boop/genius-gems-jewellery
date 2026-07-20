@@ -348,6 +348,58 @@
                 if (grandtotalEl) grandtotalEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
             }
 
+            // Helper function to save order to Hostinger Database
+            function saveOrderToDatabase(paymentId, status, callback) {
+                const name = document.getElementById('bill-name').value.trim();
+                const phone = document.getElementById('bill-phone').value.trim();
+                const email = document.getElementById('bill-email').value.trim();
+                const address = document.getElementById('bill-address').value.trim();
+                const city = document.getElementById('bill-city').value.trim();
+                const state = document.getElementById('bill-state').value.trim();
+                const zip = document.getElementById('bill-zip').value.trim();
+
+                const subtotal = cartList.reduce((sum, item) => sum + item.price, 0);
+                const gst = Math.round(subtotal * 0.03);
+                const grandTotal = subtotal + gst;
+
+                const orderData = {
+                    name,
+                    phone,
+                    email,
+                    address,
+                    city,
+                    state,
+                    zip,
+                    items: cartList.map(item => `${item.name} (${item.weight}, Price: ₹${item.price.toLocaleString('en-IN')})`).join(' | '),
+                    subtotal,
+                    gst,
+                    grand_total: grandTotal,
+                    payment_status: status,
+                    payment_id: paymentId
+                };
+
+                fetch('api/save_order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log("Order logged in database, ID: " + data.order_id);
+                    } else {
+                        console.error("Database save failed: " + data.error);
+                    }
+                    if (callback) callback();
+                })
+                .catch(err => {
+                    console.error("Database connection error: ", err);
+                    if (callback) callback(); // Proceed even if server connection fails
+                });
+            }
+
             // 4. WhatsApp Order Submission
             if (whatsappOrderBtn) {
                 whatsappOrderBtn.addEventListener('click', () => {
@@ -388,10 +440,10 @@
                     const encodedText = encodeURIComponent(text);
                     const waUrl = `https://wa.me/${waPhone}?text=${encodedText}`;
 
-                    showToast("Redirecting to WhatsApp for reservation...");
-                    setTimeout(() => {
+                    showToast("Saving reservation and redirecting to WhatsApp...");
+                    saveOrderToDatabase(null, 'WhatsApp Reserved', () => {
                         window.open(waUrl, '_blank');
-                    }, 1000);
+                    });
                 });
             }
 
@@ -432,30 +484,32 @@
                         "description": "Bespoke Gemstone Reservation Payment",
                         "image": "assets/images/logo.png",
                         "handler": function (response) {
-                            showToast("Payment Successful! ID: " + response.razorpay_payment_id);
+                            showToast("Payment Successful! Saving to database...");
                             
-                            // Send auto-confirmation details via WhatsApp after successful payment
-                            let itemsMessage = '';
-                            cartList.forEach((item, index) => {
-                                itemsMessage += `${index + 1}. *${item.name}* (Weight: ${item.weight}, Price: ₹${item.price.toLocaleString('en-IN')})\n`;
-                            });
+                            saveOrderToDatabase(response.razorpay_payment_id, 'Paid', () => {
+                                // Send auto-confirmation details via WhatsApp after successful payment
+                                let itemsMessage = '';
+                                cartList.forEach((item, index) => {
+                                    itemsMessage += `${index + 1}. *${item.name}* (Weight: ${item.weight}, Price: ₹${item.price.toLocaleString('en-IN')})\n`;
+                                });
 
-                            const successText = `Hello Genius Gems & Jewellery, I have completed the online payment of ₹${grandTotal.toLocaleString('en-IN')} (Razorpay ID: ${response.razorpay_payment_id}) for the following gemstones:\n\n*--- GEMSTONE SELECTIONS ---*\n${itemsMessage}\n*GST (3%)*: ₹${gst.toLocaleString('en-IN')}\n*Grand Total Paid*: ₹${grandTotal.toLocaleString('en-IN')}\n\n*--- RESERVATION DETAILS ---*\n*Name*: ${name}\n*Phone*: ${phone}\n*Address*: ${address}, ${city}, ${state} - ${zip}`;
-                            
-                            const waPhone = "919785925876";
-                            const encodedText = encodeURIComponent(successText);
-                            const waUrl = `https://wa.me/${waPhone}?text=${encodedText}`;
-                            
-                            setTimeout(() => {
-                                window.open(waUrl, '_blank');
-                                // Clear cart on success
-                                localStorage.removeItem('genius_gems_cart');
-                                localStorage.removeItem('genius_gems_wishlist');
-                                if (typeof updateWishlistBadge === 'function') {
-                                    updateWishlistBadge();
-                                }
-                                loadCheckoutItems();
-                            }, 1500);
+                                const successText = `Hello Genius Gems & Jewellery, I have completed the online payment of ₹${grandTotal.toLocaleString('en-IN')} (Razorpay ID: ${response.razorpay_payment_id}) for the following gemstones:\n\n*--- GEMSTONE SELECTIONS ---*\n${itemsMessage}\n*GST (3%)*: ₹${gst.toLocaleString('en-IN')}\n*Grand Total Paid*: ₹${grandTotal.toLocaleString('en-IN')}\n\n*--- RESERVATION DETAILS ---*\n*Name*: ${name}\n*Phone*: ${phone}\n*Address*: ${address}, ${city}, ${state} - ${zip}`;
+                                
+                                const waPhone = "919785925876";
+                                const encodedText = encodeURIComponent(successText);
+                                const waUrl = `https://wa.me/${waPhone}?text=${encodedText}`;
+                                
+                                setTimeout(() => {
+                                    window.open(waUrl, '_blank');
+                                    // Clear cart on success
+                                    localStorage.removeItem('genius_gems_cart');
+                                    localStorage.removeItem('genius_gems_wishlist');
+                                    if (typeof updateWishlistBadge === 'function') {
+                                        updateWishlistBadge();
+                                    }
+                                    loadCheckoutItems();
+                                }, 1000);
+                            });
                         },
                         "prefill": {
                             "name": name,
