@@ -16,8 +16,14 @@ $conn = get_db_connection();
 $sql = "SELECT * FROM orders ORDER BY order_date DESC";
 $result = $conn->query($sql);
 
+if (!$result) {
+    echo json_encode(["success" => false, "error" => "Database Query Error: " . $conn->error]);
+    $conn->close();
+    exit;
+}
+
 $orders = [];
-if ($result && $result->num_rows > 0) {
+if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $orders[] = $row;
     }

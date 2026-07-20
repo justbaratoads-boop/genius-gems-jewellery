@@ -10,7 +10,7 @@ define('DB_PASS', 'Sunilxyz@098'); // Hostinger Database Password
 
 // Establish database connection
 function get_db_connection() {
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ($conn->connect_error) {
         header('Content-Type: application/json');
         die(json_encode(["success" => false, "error" => "Database connection failed: " . $conn->connect_error]));

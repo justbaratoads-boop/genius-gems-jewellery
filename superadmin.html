@@ -575,12 +575,13 @@
                             calculateKPIs();
                             showToast("Dashboard unlocked successfully.");
                         } else {
+                            errorMsg.textContent = data.error || "Incorrect credentials. Access Denied.";
                             errorMsg.style.display = 'block';
                             passInput.value = '';
                         }
                     })
                     .catch(err => {
-                        errorMsg.textContent = "Error connecting to the database API. Check config.php.";
+                        errorMsg.textContent = "Error connecting to the database API. Make sure the PHP files are deployed on Hostinger, the orders table is imported, and config.php matches your database.";
                         errorMsg.style.display = 'block';
                     });
             }
