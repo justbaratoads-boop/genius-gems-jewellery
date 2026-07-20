@@ -2,6 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+    exit(0);
+}
+
 require_once 'config.php';
 
 // Simple password verification to protect customer data

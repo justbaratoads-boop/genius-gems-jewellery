@@ -560,7 +560,7 @@
                 const password = passInput.value.trim();
                 
                 // Fetch orders using entered password to verify
-                fetch(`api/get_orders.php?password=${encodeURIComponent(password)}`)
+                fetch(`https://geniusgemsandjewellery.in/api/get_orders.php?password=${encodeURIComponent(password)}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
@@ -610,7 +610,7 @@
 
             // Load Orders from Server
             function fetchOrders() {
-                fetch(`api/get_orders.php?password=${encodeURIComponent(adminPassword)}`)
+                fetch(`https://geniusgemsandjewellery.in/api/get_orders.php?password=${encodeURIComponent(adminPassword)}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
@@ -741,7 +741,7 @@
             window.updateOrderStatus = (orderId, newStatus) => {
                 if (!confirm(`Are you sure you want to mark this order status as ${newStatus}?`)) return;
 
-                fetch('api/update_order.php', {
+                fetch('https://geniusgemsandjewellery.in/api/update_order.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -765,7 +765,7 @@
             window.deleteOrder = (orderId) => {
                 if (!confirm("Are you sure you want to permanently delete this order record? This action cannot be undone.")) return;
 
-                fetch('api/update_order.php', {
+                fetch('https://geniusgemsandjewellery.in/api/update_order.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
